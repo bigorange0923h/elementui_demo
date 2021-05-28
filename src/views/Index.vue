@@ -1,26 +1,11 @@
 <!-- 首页 -->
 <template>
   <div>
-    <el-container>
-      <el-header>
-        <!-- 导航菜单 -->
-        <el-menu
-          :default-active="activeIndex"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          active-text-color="#409EFF"
-        >
-          <el-menu-item index="1">主页</el-menu-item>
-          <el-menu-item index="2">用户管理</el-menu-item>
-          <el-menu-item index="3">消息中心</el-menu-item>
-          <el-menu-item index="4">订单管理</el-menu-item>
-        </el-menu>
-      </el-header>
-      <el-main>
-        <router-view />
-      </el-main>
-    </el-container>
+    <el-carousel indicator-position="outside" type="card" height="800px">
+      <el-carousel-item v-for="item in banners" :key="item">
+        <img :src="item" style="width: 100%; height: 100%" />
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
@@ -28,9 +13,21 @@
 export default {
   name: "Index",
   data() {
-    return {};
+    return {
+      activeIndex: "1",
+      banners: [
+        require("../assets/indexImgs/1.jpg"),
+        require("../assets/indexImgs/2.jpg"),
+        require("../assets/indexImgs/3.jpg"),
+        require("../assets/indexImgs/4.jpg"),
+      ],
+    };
   },
-  methods: {},
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+  },
   components: {},
   created() {},
 };
